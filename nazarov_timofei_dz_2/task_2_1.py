@@ -1,4 +1,4 @@
-#1й способ
+# 1й способ
 print(type(15 * 3))
 print(type(15 / 3))
 print(type(15 // 2))
