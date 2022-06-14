@@ -10,4 +10,4 @@ with urllib.request.urlopen(url) as response:
         data = (line_lst[0], line_lst[5][1:], line_lst[6])
         data_list.append(data)
 
-# print(data_list)
+print(data_list)
