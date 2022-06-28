@@ -1,26 +1,11 @@
+import re
+import urllib.request
+RE_DATA = re.compile(r'^([\d.]+)[\s-]+([\S\w\s]+[]])\W+(\w+)\s(\S+)\s\S+\s(\d+)\s(\d+)')
 
-def logger(func):
-    def wrapper(*args):
-        result = func(*args)
-        print(type(args))
-        output = ''
-        #output = ''f',' .join(map(str, args))
-        for arg in args:
-            if len(args) > 1:
-                output += f'({arg}: {type(arg)}), '
-            else:
-                output += f'({arg}: {type(arg)}), '
-        print(f'{func.__name__}{output[:-2]}')
-        return result
-    return wrapper
-
-
-@logger
-def calc_cubes(*args):
-    res = []
-    for num in args:
-        res.append(num**3)
-    return res
-
-
-a = calc_cubes(5, 3, 2)
+url = 'https://gbcdn.mrgcdn.ru/uploads/asset/2729331/attachment/e84f9ad49c706008fba3b58e2a1e5b09.txt'
+with urllib.request.urlopen(url) as response:
+    for line in response:
+        line = str(line).strip("b'")[:-3]
+        print(line)
+        parsed_line = RE_DATA.findall(line)
+        print(*parsed_line)
